@@ -1,23 +1,26 @@
-import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Minji from "../pages/Minji";
-import Haerin from "../pages/Haerin";
-import Hanni from "../pages/Hanni";
-import Danielle from "../pages/Danielle";
-import Hyein from "../pages/Hyein";
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Detail from "../pages/Detail";
+import App from "../App";
+import { useState } from "react";
 
 function Router() {
+  const [message, setMessage] = useState([]);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="read" element={<Read/>}/>
-        <Route path="hanni" element={<Hanni/>}/>
-        <Route path="danielle" element={<Danielle/>}/>
-        <Route path="hyein" element={<Hyein/>}/>
+        //들어가는 페이지들
+        <Route
+          path="/"
+          element={<App message={message} setMessage={setMessage} />}
+        />
+        <Route
+          path="/detail/:letterid"
+          element={<Detail message={message} setMessage={setMessage} />}
+        />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default Router
+export default Router;
