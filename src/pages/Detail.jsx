@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import { MessageWrap } from "../components/MessageWrap";
-import { Header } from "../components/Stylecomponents";
-import Button from "../components/Button";
+import * as St from "../styled-components/StComponent";
+import { setDeleteMsgState } from "../redux/modules/message";
 
-function Detail({ message, setMessage }) {
-  console.log(message);
+function Detail() {
+  const message = useSelector((state) => state.message);
+
   const { letterid } = useParams();
   const data = message.find((msg) => {
     return msg.id === letterid;
@@ -36,10 +37,10 @@ function Detail({ message, setMessage }) {
     target.contents = editText;
     setIsEdit(false);
   };
-
+  const dispatch = useDispatch();
   const deleteMsg = () => {
     let filtered = message.filter((msg) => msg.id !== letterid);
-    setMessage(filtered);
+    dispatch(setDeleteMsgState(filtered));
     navi("/");
   };
 
@@ -60,10 +61,10 @@ function Detail({ message, setMessage }) {
     <div>
       {
         <>
-          <Header>
-            <Button onClick={goHome}>HOME</Button>
-          </Header>
-          <MessageWrap $detail={true}>
+          <St.Header>
+            <St.Button onClick={goHome}>HOME</St.Button>
+          </St.Header>
+          <St.MessageWrap $detail={true}>
             <p>작성시간 {data.time.toString().slice(0, 25)}</p>
             <div>닉네임 {data.name}</div>
 
@@ -83,19 +84,19 @@ function Detail({ message, setMessage }) {
 
             {/* 3-2. isEdit이 true 라면 ? 수정확인 버튼 아니라면 : 수정 버튼 */}
             {isEdit === true ? (
-              <Button
+              <St.Button
                 onClick={() => {
                   editMsg(editText);
                 }}
               >
                 수정 확인
-              </Button>
+              </St.Button>
             ) : (
               // 1-3. 버튼을 클릭 시 isEdit state를 변경한다.
-              <Button onClick={handleChangeIsEdit}>수정</Button>
+              <St.Button onClick={handleChangeIsEdit}>수정</St.Button>
             )}
-            <Button onClick={deleteAlert}>삭제</Button>
-          </MessageWrap>
+            <St.Button onClick={deleteAlert}>삭제</St.Button>
+          </St.MessageWrap>
         </>
       }
     </div>

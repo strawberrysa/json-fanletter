@@ -1,26 +1,26 @@
 import React from "react";
 import { useState } from "react";
-import { ButtonWrap, BackgroundImg } from "./Stylecomponents";
-import Button from "./Button";
-import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import * as St from "../styled-components/StComponent";
+import { changeMember } from "../redux/modules/curmember";
 
-function Background({ setCurmember }) {
+function Background() {
+  const dispatch = useDispatch();
+
   const currentMember = (event) => {
     //curMember를 현재 이벤트가 일어나는 요소의 innerText로 바꿔주세요 (온클릭 때 작동하는 함수)
-    setCurmember(event.target.innerText);
-    console.log(currentMember);
+    dispatch(changeMember(event.target.innerText));
   };
-
   const setBg = () => {
     setBgColor(true);
   };
   const [bgColor, setBgColor] = useState(false);
   return (
     <div>
-      <BackgroundImg>
-        <Title>🎀🅛🅞🅥🅔 🅦🅗🅐🅣 🅨🅞🅤 🅗🅐🅥🅔🐰</Title>
-        <ButtonWrap>
-          <Button
+      <St.BackgroundImg>
+        <St.Title>🎀🅛🅞🅥🅔 🅦🅗🅐🅣 🅨🅞🅤 🅗🅐🅥🅔🐰</St.Title>
+        <St.ButtonWrap>
+          <St.Button
             $bgColor={bgColor}
             onClick={(event) => {
               currentMember(event);
@@ -28,8 +28,8 @@ function Background({ setCurmember }) {
             }}
           >
             모두🐰
-          </Button>
-          <Button
+          </St.Button>
+          <St.Button
             $bgColor={bgColor}
             onClick={(event) => {
               currentMember(event);
@@ -37,8 +37,8 @@ function Background({ setCurmember }) {
             }}
           >
             민지
-          </Button>
-          <Button
+          </St.Button>
+          <St.Button
             $bgColor={bgColor}
             onClick={(event) => {
               currentMember(event);
@@ -46,8 +46,8 @@ function Background({ setCurmember }) {
             }}
           >
             해린
-          </Button>
-          <Button
+          </St.Button>
+          <St.Button
             $bgColor={bgColor}
             onClick={(event) => {
               currentMember(event);
@@ -55,8 +55,8 @@ function Background({ setCurmember }) {
             }}
           >
             하니
-          </Button>
-          <Button
+          </St.Button>
+          <St.Button
             $bgColor={bgColor}
             onClick={(event) => {
               currentMember(event);
@@ -64,8 +64,8 @@ function Background({ setCurmember }) {
             }}
           >
             다니엘
-          </Button>
-          <Button
+          </St.Button>
+          <St.Button
             $bgColor={bgColor}
             onClick={(event) => {
               currentMember(event);
@@ -73,17 +73,11 @@ function Background({ setCurmember }) {
             }}
           >
             혜인
-          </Button>
-        </ButtonWrap>
-      </BackgroundImg>
+          </St.Button>
+        </St.ButtonWrap>
+      </St.BackgroundImg>
     </div>
   );
 }
 
 export default Background;
-
-const Title = styled.h1`
-  margin-top: 8%;
-  color: white;
-  font-size: 1.5rem;
-`;

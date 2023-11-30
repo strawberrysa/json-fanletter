@@ -3,13 +3,16 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Detail from "../pages/Detail";
 import App from "../App";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function Router() {
   const [message, setMessage] = useState([]);
+  const shop = useSelector((state) => state.message);
+  // console.log("편집샵들앱", shop);
   return (
     <BrowserRouter>
       <Routes>
-        //들어가는 페이지들
+        {/* //들어가는 페이지들 */}
         <Route
           path="/"
           element={<App message={message} setMessage={setMessage} />}
