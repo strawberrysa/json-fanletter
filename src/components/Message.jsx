@@ -23,6 +23,7 @@ function Message() {
     <div>
       <div>
         {filtered?.map((msg) => {
+          console.log(msg);
           return (
             <St.MessageWrap
               onClick={() => {

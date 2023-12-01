@@ -9,7 +9,6 @@ function InputContainer() {
   const [contents, setContents] = useState("");
   const [sendWho, setSendWho] = useState("민지");
   //message 상점을 즐겨찾기 함.
-  const message = useSelector((state) => state.message);
 
   //const now = new Date();
   // const formattedTime = now.toLocaleString();
@@ -22,15 +21,18 @@ function InputContainer() {
       alert("닉네임 또는 메세지를 입력하세요");
     } else {
       const card = {
-        time: new Date(),
+        time: new Date().getTime(),
         id: uuid(),
         name,
         contents,
         sendWho,
         avatar: "assets/default-avatar.png",
       };
+      // sendMsg(state, action) {
+      //   return [...state, action.payload];
+      // }
       // setMessage([...message, card]);
-      dispatch(sendMsg([...message, card]));
+      dispatch(sendMsg(card));
 
       setName(""); // 메세지 등록 후 input 초기화
       setContents(""); // 메세지 등록 후 input 초기화

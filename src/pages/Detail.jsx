@@ -33,7 +33,9 @@ function Detail() {
 
   // 3. 수정 버튼을 누르면 setMessage로 업데이트
   const editMsg = (editText) => {
+    console.log(editText);
     let target = message.find((msg) => msg.id === letterid);
+    console.log(target.contents);
     target.contents = editText;
     setIsEdit(false);
   };
