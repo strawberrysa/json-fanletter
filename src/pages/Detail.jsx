@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import * as St from "../styled-components/StComponent";
 import { setDeleteMsgState } from "../redux/modules/message";
+import { updateMsg } from "../redux/modules/message";
 
 function Detail() {
   const message = useSelector((state) => state.message);
@@ -32,14 +33,17 @@ function Detail() {
   };
 
   // 3. 수정 버튼을 누르면 setMessage로 업데이트
+  const dispatch = useDispatch();
   const editMsg = (editText) => {
+    //원하는 요소를 직접 찾아서 수정해주지않기
+    //원하는 요소의 인덱스를 찾기, 왜 원하는 요소의 인덱스와 수정해줄
+    //text를 dispatch로 배달해주어서
+    //reducers안에 잇는 함수 안에서 새롭게 해주어야 하기 때문
     console.log(editText);
-    let target = message.find((msg) => msg.id === letterid);
-    console.log(target.contents);
-    target.contents = editText;
+    let targetIndex = message.findIndex((msg) => msg.id === letterid);
+    dispatch(updateMsg({ index: targetIndex, contents: editText }));
     setIsEdit(false);
   };
-  const dispatch = useDispatch();
   const deleteMsg = () => {
     let filtered = message.filter((msg) => msg.id !== letterid);
     dispatch(setDeleteMsgState(filtered));

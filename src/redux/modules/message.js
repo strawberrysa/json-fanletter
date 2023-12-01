@@ -53,7 +53,9 @@ const messageSlice = createSlice({
     sendMsg(state, action) {
       return [...state, action.payload];
     },
-    updateMsg(state) {
+    updateMsg(state, action) {
+      //console.log(action);
+      state[action.payload.index].contents = action.payload.contents;
       return state;
     },
     setDeleteMsgState(state, action) {
